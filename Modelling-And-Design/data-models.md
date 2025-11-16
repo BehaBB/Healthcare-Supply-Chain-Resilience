@@ -23,7 +23,7 @@ erDiagram
 ```
 ## Core Data Models
 ## Pharmacy Entity
-sql
+```sql
 CREATE TABLE pharmacies (
     id UUID PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
@@ -37,8 +37,9 @@ CREATE TABLE pharmacies (
     created_at TIMESTAMP DEFAULT NOW(),
     updated_at TIMESTAMP DEFAULT NOW()
 );
-Medication Entity
-sql
+```
+## Medication Entity
+```sql
 CREATE TABLE medications (
     id UUID PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
@@ -52,8 +53,9 @@ CREATE TABLE medications (
     requires_prescription BOOLEAN DEFAULT FALSE,
     created_at TIMESTAMP DEFAULT NOW()
 );
-Inventory Entity
-sql
+```
+## Inventory Entity
+```sql
 CREATE TABLE inventory (
     id UUID PRIMARY KEY,
     pharmacy_id UUID REFERENCES pharmacies(id),
@@ -68,9 +70,10 @@ CREATE TABLE inventory (
     created_at TIMESTAMP DEFAULT NOW(),
     updated_at TIMESTAMP DEFAULT NOW()
 );
-Temperature Monitoring Models
-Temperature Sensor
-sql
+```
+## Temperature Monitoring Models
+## Temperature Sensor
+```sql
 CREATE TABLE temperature_sensors (
     id UUID PRIMARY KEY,
     device_id VARCHAR(100) UNIQUE NOT NULL,
@@ -83,8 +86,9 @@ CREATE TABLE temperature_sensors (
     status VARCHAR(20) DEFAULT 'active',
     created_at TIMESTAMP DEFAULT NOW()
 );
-Temperature Reading
-sql
+```
+## Temperature Reading
+```sql
 CREATE TABLE temperature_readings (
     id UUID PRIMARY KEY,
     sensor_id UUID REFERENCES temperature_sensors(id),
@@ -97,9 +101,10 @@ CREATE TABLE temperature_readings (
     alert_generated BOOLEAN DEFAULT FALSE,
     created_at TIMESTAMP DEFAULT NOW()
 );
-Logistics & Delivery Models
-Delivery Entity
-sql
+```
+## Logistics & Delivery Models
+## Delivery Entity
+```sql
 CREATE TABLE deliveries (
     id UUID PRIMARY KEY,
     pharmacy_id UUID REFERENCES pharmacies(id),
@@ -119,8 +124,9 @@ CREATE TABLE deliveries (
     created_at TIMESTAMP DEFAULT NOW(),
     updated_at TIMESTAMP DEFAULT NOW()
 );
-Delivery Item
-sql
+```
+## Delivery Item
+```sql
 CREATE TABLE delivery_items (
     id UUID PRIMARY KEY,
     delivery_id UUID REFERENCES deliveries(id),
@@ -134,8 +140,9 @@ CREATE TABLE delivery_items (
     status VARCHAR(20) DEFAULT 'pending',
     created_at TIMESTAMP DEFAULT NOW()
 );
-Route Optimization Models
-sql
+```
+## Route Optimization Models
+```sql
 CREATE TABLE routes (
     id UUID PRIMARY KEY,
     delivery_id UUID REFERENCES deliveries(id),
@@ -162,9 +169,10 @@ CREATE TABLE route_segments (
     weather_alert BOOLEAN DEFAULT FALSE,
     created_at TIMESTAMP DEFAULT NOW()
 );
-Compliance & Regulatory Models
-Regulation Entity
-sql
+```
+## Compliance & Regulatory Models
+## Regulation Entity
+```sql
 CREATE TABLE regulations (
     id UUID PRIMARY KEY,
     country_code VARCHAR(3) NOT NULL,
@@ -176,8 +184,9 @@ CREATE TABLE regulations (
     compliance_requirements JSONB,
     created_at TIMESTAMP DEFAULT NOW()
 );
-Compliance Document
-sql
+```
+## Compliance Document
+```sql
 CREATE TABLE compliance_documents (
     id UUID PRIMARY KEY,
     delivery_id UUID REFERENCES deliveries(id),
@@ -191,9 +200,10 @@ CREATE TABLE compliance_documents (
     created_at TIMESTAMP DEFAULT NOW(),
     updated_at TIMESTAMP DEFAULT NOW()
 );
-Analytics & Reporting Models
-KPI Metrics
-sql
+```
+## Analytics & Reporting Models
+## KPI Metrics
+```sql
 CREATE TABLE kpi_metrics (
     id UUID PRIMARY KEY,
     pharmacy_id UUID REFERENCES pharmacies(id),
@@ -215,9 +225,10 @@ CREATE TABLE temperature_compliance_logs (
     critical_violations INTEGER DEFAULT 0,
     created_at TIMESTAMP DEFAULT NOW()
 );
-Indexing Strategy
-Performance Indexes
-sql
+```
+## Indexing Strategy
+## Performance Indexes
+```sql
 -- Temperature monitoring performance
 CREATE INDEX idx_temperature_readings_sensor_time 
 ON temperature_readings(sensor_id, reading_time DESC);
@@ -248,7 +259,8 @@ ON pharmacies USING GIST(gps_coordinates);
 CREATE INDEX idx_temperature_readings_location 
 ON temperature_readings USING GIST(gps_coordinates);
 Data Retention Policies
-Operational Data
+```
+## Operational Data
 Temperature Readings: 2 years detailed, 7 years aggregated
 
 Delivery Records: 5 years complete history
@@ -257,7 +269,7 @@ Compliance Documents: 10 years (regulatory requirement)
 
 Inventory Transactions: 3 years detailed, perpetual aggregates
 
-Analytics Data
+## Analytics Data
 KPI Metrics: Perpetual with monthly aggregation
 
 Audit Logs: 7 years complete history
