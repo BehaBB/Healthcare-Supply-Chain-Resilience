@@ -303,14 +303,15 @@ Authorization: Bearer {token}
 ```
 ### Error Handling
 #### Common HTTP Status Codes
-Code	Description
-200	Success
-400	Bad Request - Invalid input parameters
-401	Unauthorized - Invalid or missing authentication
-403	Forbidden - Insufficient permissions
-404	Not Found - Resource not found
-429	Rate Limit Exceeded
-500	Internal Server Error
+| Code | Description |
+|------|-------------|
+| 200 | Success |
+| 400 | Bad Request - Invalid input parameters |
+| 401 | Unauthorized - Invalid or missing authentication |
+| 403 | Forbidden - Insufficient permissions |
+| 404 | Not Found - Resource not found |
+| 429 | Rate Limit Exceeded |
+| 500 | Internal Server Error |
 #### Error Response Format
 ```json
 {
@@ -334,13 +335,14 @@ X-RateLimit-Remaining: Remaining requests
 X-RateLimit-Reset: Reset time (Unix timestamp)
 
 #### Limits by Endpoint
-Endpoint	Limit	Window
-Temperature readings	100	1 minute
-Route optimization	50	1 hour
-Document generation	200	1 hour
-General endpoints	1000	1 hour
+| Endpoint | Limit | Window |
+|----------|-------|--------|
+| Temperature readings | 100 | 1 minute |
+| Route optimization | 50 | 1 hour |
+| Document generation | 200 | 1 hour |
+| General endpoints | 1000 | 1 hour |
 #### Webhooks
-Available Webhooks
+#### Available Webhooks
 #### Temperature Alerts:
 
 ```http
