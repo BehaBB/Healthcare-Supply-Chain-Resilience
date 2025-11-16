@@ -1,6 +1,6 @@
-## 4-Prototyping/temperature-monitor/
+markdown
+## 4-Prototyping/temperature-monitor/sensor_processor.py
 
-### 4-Prototyping/temperature-monitor/sensor_processor.py
 ```python
 """
 Temperature Sensor Data Processor
