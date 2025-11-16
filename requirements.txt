@@ -1,9 +1,0 @@
-```txt
-python>=3.9
-pandas>=1.4.0
-numpy>=1.21.0
-requests>=2.28.0
-fastapi>=0.68.0
-pydantic>=1.8.0
-scikit-learn>=1.0.0
-matplotlib>=3.5.0
